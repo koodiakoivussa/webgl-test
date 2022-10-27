@@ -3,6 +3,26 @@ Small WebGL test based on Indigo Codes(Youtube) tutorial:
 https://www.youtube.com/watch?v=kB0ZVUrI4Aw
 */
 
+
+const initShaders = function () {
+    loadTextResource("/vertexShader.js", function (vsErr, vsText){
+        if (vsErr){
+            alert('Error with vertex shader');
+            console.error(vsErr);
+        } else {
+            loadTextResource("/fragmentShader.js", function (fsErr, fsText){
+                if (fsErr){
+                    alert('Error with fragment shader');
+                    console.error(fsErr);
+                } else {
+                    InitDemo(vsText, fsText);
+                }
+            });
+        }
+    });
+};
+
+/*
 const vertexShaderText = 
 `
     precision mediump float;
@@ -17,21 +37,21 @@ const vertexShaderText =
        gl_Position = vec4(vertPosition, 0.0, 1.0);
     }
 `;
-
 const fragmentShaderText = 
 `
     precision mediump float;
     
     varying vec3 fragColor;
     uniform float uTime;
-    
+
     void main()
     {
        gl_FragColor = vec4(fragColor, 1.0) + (0.25 + 0.25 * vec4(cos(uTime + fragColor.xyx + vec3(0,3,6)), 0));
     }
 `;
+*/
 
-var InitDemo = function (){
+var InitDemo = function (vertexShaderText, fragmentShaderText){
 
 console.log("This is working");
 
@@ -79,7 +99,7 @@ if(!gl.getProgramParameter(program, gl.VALIDATE_STATUS)){
 }
 
 
-const triangleVertices = 
+const quadVertices = 
 [
     -1.0, 1.0,          1, 0, 0,
     -1.0, -1.0,         1, 1, 0,
@@ -89,9 +109,9 @@ const triangleVertices =
 
 const indices = [3, 2, 1, 3, 1, 0];
 
-const triangleVertexBufferObject = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexBufferObject);
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
+const quadVertexBufferObject = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, quadVertexBufferObject);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(quadVertices), gl.STATIC_DRAW);
 
 const indexBufferObject = gl.createBuffer();
 gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBufferObject);
