@@ -5,12 +5,12 @@ https://www.youtube.com/watch?v=kB0ZVUrI4Aw
 
 
 const initShaders = function () {
-    loadTextResource("/vertexShader.js", function (vsErr, vsText){
+    loadTextResource("/vertexShader.vs", function (vsErr, vsText){
         if (vsErr){
             alert('Error with vertex shader');
             console.error(vsErr);
         } else {
-            loadTextResource("/fragmentShader.js", function (fsErr, fsText){
+            loadTextResource("/fragmentShader.fs", function (fsErr, fsText){
                 if (fsErr){
                     alert('Error with fragment shader');
                     console.error(fsErr);
@@ -101,10 +101,10 @@ if(!gl.getProgramParameter(program, gl.VALIDATE_STATUS)){
 
 const quadVertices = 
 [
-    -1.0, 1.0,          1, 0, 0,
-    -1.0, -1.0,         1, 1, 0,
-    1.0, -1.0,          0, 1, 1,
-    1.0, 1.0,           0, 0, 1    
+    -1.0, 1.0,          0, 1, 0,
+    -1.0, -1.0,         0, 0, 0,
+    1.0, -1.0,          1, 0, 1,
+    1.0, 1.0,           1, 1, 1    
 ];
 
 const indices = [3, 2, 1, 3, 1, 0];
@@ -120,6 +120,7 @@ gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW)
 const positionAttributeLocation = gl.getAttribLocation(program, 'vertPosition');
 const colorAttributeLocation = gl.getAttribLocation(program, 'vertColor');
 const timeAttributeLocation = gl.getUniformLocation(program, 'uTime');
+const resolutionAttributeLocation = gl.getUniformLocation(program, 'uResolution');
 
 gl.vertexAttribPointer(
     positionAttributeLocation,
@@ -140,12 +141,17 @@ gl.vertexAttribPointer(
 
 gl.enableVertexAttribArray(positionAttributeLocation);
 gl.enableVertexAttribArray(colorAttributeLocation);
-gl.useProgram(program);
+
+
 
 function render(time){
     gl.uniform1f(timeAttributeLocation, time / 1000);
+    gl.uniform2f(resolutionAttributeLocation, window.innerWidth, window.innerHeight);    
     requestAnimationFrame(render);
     gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
     }    
 requestAnimationFrame(render);
+
+
+gl.useProgram(program);
 };

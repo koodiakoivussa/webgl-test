@@ -10,5 +10,4 @@ const loadTextResource = function (url, callback){
         }
     };
     request.send();
-
 };
