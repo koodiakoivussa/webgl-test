@@ -15,6 +15,7 @@
       return fract(vec2(a.x*a.y, a.y*a.z));
     }
 
+
     void main()
     {
       vec2 res = uResolution;
@@ -24,6 +25,7 @@
       float m = 0.;
       float t = uTime;
       float minDist = 100.;
+
 
       for(float i=1.; i <50.; i++){
          vec2 n = n22(vec2(i, i));

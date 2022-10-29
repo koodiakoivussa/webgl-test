@@ -3,14 +3,21 @@ Small WebGL test based on Indigo Codes(Youtube) tutorial:
 https://www.youtube.com/watch?v=kB0ZVUrI4Aw
 */
 
+const shaderLocations = [
+    "/vertexShader.vs", // 0
+    "/colorShader.fs",  // 1
+    "/voronoiShader.fs", // 2
+    "/testShader.fs",     // 3
+    "/starShader.fs" 
+]
 
 const initShaders = function () {
-    loadTextResource("/vertexShader.vs", function (vsErr, vsText){
+    loadTextResource(shaderLocations[0], function (vsErr, vsText){
         if (vsErr){
             alert('Error with vertex shader');
             console.error(vsErr);
         } else {
-            loadTextResource("/fragmentShader.fs", function (fsErr, fsText){
+            loadTextResource(shaderLocations[4], function (fsErr, fsText){
                 if (fsErr){
                     alert('Error with fragment shader');
                     console.error(fsErr);
@@ -21,6 +28,7 @@ const initShaders = function () {
         }
     });
 };
+
 
 /*
 const vertexShaderText = 
