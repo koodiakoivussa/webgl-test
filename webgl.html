@@ -10,16 +10,37 @@
     <title>WebGL</title>
 </head>
 <body onload="initShaders();">
-    <header>        
-        <h2>WebGL Test</h2>
-    </header>
+    <header>           
 
+        <ul class="nav-list">
+            <li class="nav-item nav-logo">
+                <b> WebGL Test </b>
+            </li>
+            <li class="nav-item">
+                hello
+            </li>
+            <li class="nav-item">
+                hello
+            </li>
+        </ul>
+    </header>
     <canvas class="full-bg" id="glcanvas" width="800" height="600">
         Your browser does not support HTML5
     </canvas>
     <br>
-    <i>Demo *should be* as the background of this page.</i>
-    <div><p>Hello this is a test-paragraph.</p></div>
+    
+    <div class="bg-1 full-bg"></div>
+
+    <div class="grid-container">
+
+        <div class="grid-item main-content content"><p>Paragraph in main content.</p></div>
+        <div class="grid-item side-content content"><p>Paragraph in side-content</p></div>
+    
+    </div>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
 
     <script src="util.js"></script>
     <script src="webgl.js"></script>
